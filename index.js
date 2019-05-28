@@ -2,6 +2,10 @@ const Joi = require("joi");
 const express = require("express");
 const app = express();
 const api = require("./api");
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost/books", { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
 
 app.use(express.json());
 app.use("/api/v1", api);
@@ -101,11 +105,11 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port} ...`));
 
 function validateCourse(course) {
-  const schema = {
+  const schema = Joi.object().keys({
     name: Joi.string()
       .min(3)
       .required()
-  };
+  });
 
   return Joi.validate(course, schema);
 }
