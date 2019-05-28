@@ -1,8 +1,10 @@
 const Joi = require("joi");
 const express = require("express");
 const app = express();
+const api = require("./api");
 
 app.use(express.json());
+app.use("/api/v1", api);
 
 const courses = [
   { id: 1, name: "course1" },
