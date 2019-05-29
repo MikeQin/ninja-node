@@ -4,7 +4,7 @@ const app = express();
 const api = require("./api");
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/books", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/books", { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 app.use(express.json());
