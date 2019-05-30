@@ -10,16 +10,23 @@ const books = [
 ];
 
 router.get("/books", (req, res) => {
-  res.send(books);
+  Book.find({}, (err, books) => {
+    if (err) return res.send(err);
+    res.send(books);
+  });
 });
 
 router.post("/books", (req, res) => {
   // const book = new Book(req.body);
   // book.save();
-  Book.create(req.body).then(book => {
-    // promise
-    res.send(book);
-  });
+  Book.create(req.body)
+    .then(book => {
+      // promise
+      res.send(book);
+    })
+    .catch(error => {
+      console.log(error);
+    });
 });
 
 module.exports = router;

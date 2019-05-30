@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const BookSchema = new Schema({
   id: {
     type: Number,
-    required: [true, "Id field is required"]
+    required: [true, "id field is required"]
   },
   title: {
     type: String,
-    required: [true, "Title field is required"]
+    required: [true, "title field is required"]
   },
   available: {
     type: Boolean,
