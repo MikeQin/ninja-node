@@ -1,15 +1,10 @@
 const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
-const Book = require("./model/book");
-
-const books = [
-  { id: 1, title: "book1" },
-  { id: 2, title: "book2" },
-  { id: 3, title: "book3" }
-];
+const Book = require("../model/book");
 
 router.get("/books", (req, res) => {
+  console.log("GET, req");
   Book.find({}, (err, books) => {
     if (err) return res.send(err);
     res.send(books);
@@ -17,6 +12,7 @@ router.get("/books", (req, res) => {
 });
 
 router.post("/books", (req, res) => {
+  console.log(`POST, req.body: ${req.body}`);
   // const book = new Book(req.body);
   // book.save();
   Book.create(req.body)
@@ -27,6 +23,14 @@ router.post("/books", (req, res) => {
     .catch(error => {
       console.log(error);
     });
+});
+
+router.put("/books/:id", (req, res) => {
+  console.log(`PUT, id: ${req.params.id}`);
+});
+
+router.delete("/books/:id", (req, res) => {
+  console.log(`DELETE, id: ${req.params.id}`);
 });
 
 module.exports = router;

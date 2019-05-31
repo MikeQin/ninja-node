@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BookSchema = new Schema({
-  id: {
-    type: Number,
-    required: [true, "id field is required"]
-  },
   title: {
     type: String,
     required: [true, "title field is required"]
+  },
+  price: {
+    type: Number,
+    required: [true, "price field is required"]
   },
   available: {
     type: Boolean,
@@ -16,6 +16,6 @@ const BookSchema = new Schema({
   }
 });
 
-const Book = mongoose.model("book", BookSchema);
+const Book = mongoose.model("BOOK", BookSchema);
 
 module.exports = Book;

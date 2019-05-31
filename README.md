@@ -4,7 +4,7 @@ Express.js Tutorial: Build RESTful APIs with Node and Express | Mosh
 
 [https://youtu.be/pKd0Rpw7O48](https://youtu.be/pKd0Rpw7O48])
 
-### Initialize Node Project
+### Initialize a Node Project
 
 ```
 npm init
@@ -19,16 +19,23 @@ npm i express
 ### Install nodemon
 
 ```
-npm install -g nodemon
+npm i -g nodemon
+```
+
+### Install mongoose
+
+```
+npm i mongoose
 ```
 
 ### Install Joi
 
 ```
-npm install joi
+npm i joi
 ```
 
 ### To run
+
 ```
 nodemon index.js
 ```
