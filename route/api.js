@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const Book = require("../model/book");
 
-router.get("/books", (req, res) => {
+router.get("/books", (req, res, next) => {
   console.log("GET, req");
   Book.find({}, (err, books) => {
     if (err) return res.send(err);
@@ -11,8 +11,8 @@ router.get("/books", (req, res) => {
   });
 });
 
-router.post("/books", (req, res) => {
-  console.log(`POST, req.body: ${req.body}`);
+router.post("/books", (req, res, next) => {
+  console.log(`POST ...`);
   // const book = new Book(req.body);
   // book.save();
   Book.create(req.body)
@@ -20,17 +20,27 @@ router.post("/books", (req, res) => {
       // promise
       res.send(book);
     })
-    .catch(error => {
-      console.log(error);
-    });
+    .catch(next);
 });
 
-router.put("/books/:id", (req, res) => {
+router.put("/books/:id", (req, res, next) => {
   console.log(`PUT, id: ${req.params.id}`);
+  Book.findByIdAndUpdate({ _id: req.params.id }, req.body)
+    .then(() => {
+      Book.findOne({ _id: req.params.id }).then(book => {
+        res.send(book);
+      });
+    })
+    .catch(next);
 });
 
-router.delete("/books/:id", (req, res) => {
+router.delete("/books/:id", (req, res, next) => {
   console.log(`DELETE, id: ${req.params.id}`);
+  Book.findByIdAndRemove({ _id: req.params.id })
+    .then(book => {
+      res.send(book);
+    })
+    .catch(next);
 });
 
 module.exports = router;

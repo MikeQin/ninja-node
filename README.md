@@ -4,7 +4,7 @@ Express.js Tutorial: Build RESTful APIs with Node and Express | Mosh
 
 [https://youtu.be/pKd0Rpw7O48](https://youtu.be/pKd0Rpw7O48])
 
-### Initialize a Node Project
+### Initialize a Node project
 
 ```
 npm init
@@ -39,3 +39,8 @@ npm i joi
 ```
 nodemon index.js
 ```
+
+### Robomongo
+A free mongo client tool, [download](https://robomongo.org/download).
+
+Connection address: `localhost:27017`

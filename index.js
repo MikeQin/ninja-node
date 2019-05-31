@@ -8,6 +8,8 @@ mongoose.connect(
   "mongodb://localhost:27017/books",
   {
     useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
     user: "mongo",
     pass: "mongo",
     authSource: "admin"
@@ -19,8 +21,15 @@ mongoose.connect(
 mongoose.Promise = global.Promise;
 
 // Use Middleware
-app.use(express.json());
+app.use(express.json()); // equals to body-parser
 app.use("/api", api);
+// Error Handler Middleware
+app.use((err, req, res, next) => {
+  if (err) {
+    //console.log(err);
+    res.status(422).send({ code: err.code, error: err.errmsg });
+  }
+});
 
 app.get("/", (req, res) => {
   res.send("Hello World!!!");
