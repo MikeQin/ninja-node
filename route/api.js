@@ -4,7 +4,11 @@ const router = express.Router();
 const Book = require("../model/book");
 
 router.get("/books", (req, res, next) => {
-  console.log("GET, req", parseFloat(req.query.lng), parseFloat(req.query.lat));
+  console.log(
+    "GET, geometry",
+    parseFloat(req.query.lng),
+    parseFloat(req.query.lat)
+  );
 
   Book.aggregate()
     .near({
@@ -17,12 +21,12 @@ router.get("/books", (req, res, next) => {
       distanceField: "distance"
     })
     .then(books => {
-      console.log(books);
+      //console.log(books);
       if (books) {
         if (books.length === 0)
           return res.send({
             message:
-              "maxDistance is too small, or your query params are incorrect."
+              "maxDistance is too small, or your query params {lng, lat} are incorrect (too big or too small)."
           });
         return res.send(books);
       }

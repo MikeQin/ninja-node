@@ -1,41 +1,28 @@
 const Joi = require("joi");
 const express = require("express");
 const app = express();
-const api = require("./api");
-const mongoose = require("mongoose");
 
-mongoose.connect(
-  "mongodb://localhost:27017/books",
-  {
-    useNewUrlParser: true,
-    user: "mongo",
-    pass: "mongo",
-    authSource: "admin"
-  },
-  (error, db) => {
-    console.log(error);
-  }
-);
-mongoose.Promise = global.Promise;
-
+// Middleware
 app.use(express.json());
-app.use("/api", api);
 
+// Data
 const courses = [
   { id: 1, name: "course1" },
   { id: 2, name: "course2" },
   { id: 3, name: "course3" }
 ];
 
+// Root
 app.get("/", (req, res) => {
   res.send("Hello World!!!");
 });
 
+// Get All Courses
 app.get("/api/courses", (req, res) => {
   res.send(courses);
 });
 
-// /api/courses/1
+// Get A Course
 app.get("/api/courses/:id", (req, res) => {
   const course = courses.find(c => c.id === parseInt(req.params.id));
   if (!course) {
@@ -47,6 +34,7 @@ app.get("/api/courses/:id", (req, res) => {
   res.send(course);
 });
 
+// Create A Course
 app.post("/api/courses", (req, res) => {
   // object destructor {error} equals to 'result.error'
   const { error } = validateCourse(req.body);
@@ -60,6 +48,7 @@ app.post("/api/courses", (req, res) => {
   res.send(course);
 });
 
+// Update A Course
 app.put("/api/courses/:id", (req, res) => {
   // 1. find the course to be updated
   const course = courses.find(c => c.id === parseInt(req.params.id));
@@ -85,6 +74,7 @@ app.put("/api/courses/:id", (req, res) => {
   res.send(course);
 });
 
+// Delete A Course
 app.delete("/api/courses/:id", (req, res) => {
   const course = courses.find(c => c.id === parseInt(req.params.id));
   if (!course) {
@@ -101,15 +91,17 @@ app.delete("/api/courses/:id", (req, res) => {
   res.send(course);
 });
 
-// /api/posts/2019/5
-// app.get("/api/posts/:year/:month", (req, res) => {
-//   res.send(req.params);
-// });
+// Test Request Params: /api/posts/2019/5
+app.get("/api/posts/:year/:month", (req, res) => {
+  res.send(req.params);
+});
 
-// /api/posts?sortedBy=name&number=1
-// app.get("/api/posts", (req, res) => {
-//   res.send(req.query);
-// });
+// Test Query Params: /api/posts?sortedBy=name&number=1
+app.get("/api/posts", (req, res) => {
+  console.log(`Query Params sortedBy: ${req.query.sortedBy}`);
+  console.log(`Query Params number: ${req.query.number}`);
+  res.send(req.query);
+});
 
 // PORT
 const port = process.env.PORT || 3000;

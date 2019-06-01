@@ -21,6 +21,7 @@ mongoose.connect(
 mongoose.Promise = global.Promise;
 
 // Use Middleware
+app.use(express.static("public"));
 app.use(express.json()); // equals to body-parser
 app.use("/api", api);
 // Error Handler Middleware
@@ -32,7 +33,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello World!!!");
+  res.send("Hello World.");
 });
 
 // PORT

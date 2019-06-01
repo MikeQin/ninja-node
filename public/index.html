@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Book Hunting</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <h1 class="title">Book Hunting - A Book RESTful API</h1>
+  <div id="homepage">
+    <h1>Find Available Books in Your Area</h1>
+    <div id="books"></div>
+  </div>
+
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://unpkg.com/react@15/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+
+  <!-- Create React Component -->
+  <script type="text/babel">
+    var Books = React.createClass({
+      getInitialState: function() {
+          return({
+              books: []
+          });
+      },
+      render: function() {
+          var books = this.state.books;
+          books = books.map((book, index) => {
+              return(
+                  <li key={index}>
+                      <span className={book.available} />
+                      <span className="name">{book.title}</span>
+                      <span className="rank">{book.price}</span>
+                      <span className="dist">{Math.floor(book.distance / 1000)} km</span>
+                  </li>
+              );
+          });
+          return(
+              <div id="book-container">
+                  <form id="search" onSubmit={this.handleSubmit}>
+                      <label>Enter your Longitude:</label>
+                      <input type="text" ref="lng" placeholder="longitude" required />
+                      <label>Enter your Latitude:</label>
+                      <input type="text" ref="lat" placeholder="latitude" required />
+                      <input type="submit" value="Find Books" />
+                  </form>
+                  <ul>{books}</ul>
+              </div>
+          );
+      },
+      handleSubmit: function(event) {
+          event.preventDefault();
+          var lng = this.refs.lng.value;
+          var lat = this.refs.lat.value;
+
+          fetch('/api/books?lng=' + lng + '&lat=' + lat).then(data => {
+              return data.json();
+          }).then( json => {
+              console.log("##### JSON #####");
+              console.log(json);                    
+              this.setState({
+                  books: json
+              });
+          });
+      }
+    });
+    ReactDOM.render(<Books />, document.getElementById('books'));
+  </script>
+</body>
+
+</html>
