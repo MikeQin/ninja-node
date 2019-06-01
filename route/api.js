@@ -4,11 +4,41 @@ const router = express.Router();
 const Book = require("../model/book");
 
 router.get("/books", (req, res, next) => {
-  console.log("GET, req");
-  Book.find({}, (err, books) => {
-    if (err) return res.send(err);
-    res.send(books);
-  });
+  console.log("GET, req", parseFloat(req.query.lng), parseFloat(req.query.lat));
+
+  Book.aggregate()
+    .near({
+      near: {
+        type: "Point",
+        coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)]
+      },
+      maxDistance: 300000, // 300 KM
+      spherical: true,
+      distanceField: "distance"
+    })
+    .then(books => {
+      console.log(books);
+      if (books) {
+        if (books.length === 0)
+          return res.send({
+            message:
+              "maxDistance is too small, or your query params are incorrect."
+          });
+        return res.send(books);
+      }
+    })
+    .catch(next);
+
+  // Book.find({})
+  //   .then(book => {
+  //     res.send(book);
+  //   })
+  //   .catch(next);
+
+  // Book.find({}, (err, books) => {
+  //   if (err) return res.send(err);
+  //   res.send(books);
+  // });
 });
 
 router.post("/books", (req, res, next) => {
