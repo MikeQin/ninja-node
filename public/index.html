@@ -34,8 +34,8 @@
               return(
                   <li key={index}>
                       <span className={book.available} />
-                      <span className="name">{book.title}</span>
-                      <span className="rank">{book.price}</span>
+                      <span>{book.title}</span>
+                      <span>{book.price}</span>
                       <span className="dist">{Math.floor(book.distance / 1000)} km</span>
                   </li>
               );
