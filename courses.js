@@ -13,9 +13,9 @@ const courses = [
 ];
 
 // Root
-app.get("/", (req, res) => {
-  res.send("Hello World!!!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World!!!");
+// });
 
 // Get All Courses
 app.get("/api/courses", (req, res) => {
