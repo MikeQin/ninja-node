@@ -21,15 +21,15 @@ router.get("/books", (req, res, next) => {
       distanceField: "distance"
     })
     .then(books => {
-      //console.log(books);
-      if (books) {
-        if (books.length === 0)
-          return res.send({
-            message:
-              "maxDistance is too small, or your query params {lng, lat} are incorrect (too big or too small)."
-          });
-        return res.send(books);
-      }
+      console.log(books);
+      // if (books) {
+      //   if (books.length === 0)
+      //     return res.send({
+      //       message:
+      //         "maxDistance is too small, or your query params {lng, lat} are incorrect (too big or too small)."
+      //     });
+      return res.send(books);
+      //}
     })
     .catch(next);
 
