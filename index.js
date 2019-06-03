@@ -15,7 +15,7 @@ mongoose.connect(
     authSource: "admin"
   },
   (error, db) => {
-    console.log(error);
+    if (error) console.log(error);
   }
 );
 mongoose.Promise = global.Promise;
