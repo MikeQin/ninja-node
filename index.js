@@ -1,7 +1,7 @@
 //const Joi = require("joi");
 const express = require("express");
 const app = express();
-const api = require("./route/api");
+const api = require("./routes/api");
 const mongoose = require("mongoose");
 
 mongoose.connect(

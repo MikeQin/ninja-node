@@ -1,7 +1,7 @@
-const Joi = require("joi");
+//const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
-const Book = require("../model/book");
+const Book = require("../models/book");
 
 router.get("/books", (req, res, next) => {
   console.log(
