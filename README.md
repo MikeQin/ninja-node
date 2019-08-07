@@ -1,8 +1,8 @@
 # Node Learning
 
-Express.js Tutorial: Build RESTful APIs with Node and Express | Mosh
+* Ninja: REST API Tutorials (Node, Express & Mongo): https://www.youtube.com/playlist?list=PL4cUxeGkcC9jBcybHMTIia56aV21o2cZ8
 
-[https://youtu.be/pKd0Rpw7O48](https://youtu.be/pKd0Rpw7O48])
+* Mosh: Express.js Tutorial: Build RESTful APIs with Node and Express https://youtu.be/pKd0Rpw7O48
 
 ### Initialize a Node project
 
