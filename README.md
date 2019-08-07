@@ -23,7 +23,7 @@ npm i express
 ### Install nodemon
 
 ```
-npm i -g nodemon
+npm i -g nodemon --no-optional
 ```
 
 ### Install mongoose
