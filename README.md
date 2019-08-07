@@ -7,6 +7,10 @@ Express.js Tutorial: Build RESTful APIs with Node and Express | Mosh
 ### Initialize a Node project
 
 ```
+npm install npm@latest -g
+```
+
+```
 npm init
 ```
 
