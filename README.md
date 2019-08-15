@@ -34,8 +34,9 @@ npm i mongoose
 
 ### Install Joi
 
+Not really needed for now since Mongoose does validation.
 ```
-npm i joi
+# npm i joi
 ```
 
 ### To run
